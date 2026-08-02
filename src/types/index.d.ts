@@ -24,6 +24,7 @@ export type SearchableEntry =
   | HistoriaEntry
   | PoetryEntry
   | PortfolioEntry
+  | GaleriaEntry
   | RecipesEntry
   | TermsEntry;
 
