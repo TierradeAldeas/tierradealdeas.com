@@ -1,0 +1,90 @@
+---
+import type { HistoriaEntry } from "@/types";
+import Share from "@components/common/Share.astro";
+import { Image } from "astro:assets";
+import BaseLayout from "@components/base/BaseLayout.astro";
+import { upperHumanize, markdownify, slugify } from "@lib/textConverter";
+
+// Importa solo los iconos que vayas a usar, adapta si necesario
+import {
+  FaRegUserCircle,
+} from "react-icons/fa";
+
+interface Props {
+  entry: HistoriaEntry;
+}
+
+const { entry } = Astro.props;
+const {
+  title,
+  author,
+  description,
+  image,
+  imageAlt,
+  // Aquí quita propiedades específicas de recetas y añade las que necesites para historia
+} = entry.data;
+---
+
+<BaseLayout title={title} description={description} image={image?.src}>
+  <section class="section">
+    <div class="container">
+      <div class="row justify-center">
+        <article class="lg:col-10 flex flex-wrap content-start">
+          <!-- Title -->
+          <h1 set:html={title} class="p-2 col basis-full min-w-72" />
+          <!-- Cover Photo -->
+          {
+            image && (
+              <div class="col basis-full p-2 min-w-72">  <!-- aquí cambia tamaño si quieres -->
+                <div class="glass rounded-lg intersect:animate-fadeDown opacity-0">
+                  <Image
+                    class="w-full rounded-lg"
+                    src={image}
+                    alt={imageAlt}
+                    width={1920}
+                    height={1080}
+                    loading="eager"
+                  />
+                </div>
+              </div>
+            )
+          }
+          <!-- About / Author -->
+          <section class="col basis-full p-2 min-w-72">
+            <div class="glass rounded-lg p-2 h-full intersect:animate-fadeUp opacity-0">
+              {
+                author && (
+                  <div class="m-4">
+                    <a href={`/authors/${slugify(author.id)}`}>
+                      <FaRegUserCircle className={"mr-2 -mt-1 inline-block"} />
+                      {upperHumanize(author.id)}
+                    </a>
+                  </div>
+                )
+              }
+              {
+                description && (
+                  <div>
+                    <div class="m-4">
+                      <div set:html={markdownify(description)} />
+                    </div>
+                  </div>
+                )
+              }
+            </div>
+          </section>
+          <!-- Aquí añade más secciones específicas para historia, si necesitas -->
+        </article>
+        <!-- Share -->
+        <div class="flex col-10 p-2 items-center justify-center lg:justify-end px-6">
+          <Share
+            title={title}
+            description={description}
+            folder="historia"
+            id={entry.id}
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

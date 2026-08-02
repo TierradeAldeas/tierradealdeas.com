@@ -1,0 +1,42 @@
+---
+import BaseLayout from "@components/base/BaseLayout.astro";
+import HistoriaCard from "@components/historia/Card.astro";  // ruta según carpeta historia
+import Pagination from "@components/common/Pagination.astro";
+import PageHeader from "@components/common/PageHeader.astro";
+import type { HistoriaEntry } from "@/types";
+
+interface Props {
+  entryIndex: HistoriaEntry;
+  entries: HistoriaEntry[];
+  pageIndex: number;
+  pageCount: number;
+}
+
+const { entryIndex, entries, pageIndex, pageCount } = Astro.props;
+---
+
+<BaseLayout
+  title={entryIndex.data.title}
+  image={entryIndex.data.image?.src}
+  description={entryIndex.data.description}
+>
+  <PageHeader title={entryIndex.data.title} />
+  <section class="section m-2">
+    <div class="container">
+      <div class="row">
+        {
+          entries.map((entry) => (
+            <div class="md:col-6 lg:col-4 h-min p-2">
+              <HistoriaCard entry={entry} />
+            </div>
+          ))
+        }
+      </div>
+      <Pagination
+        collection="historia"
+        pageIndex={pageIndex}
+        pageCount={pageCount}
+      />
+    </div>
+  </section>
+</BaseLayout>
