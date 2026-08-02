@@ -9,6 +9,7 @@ export type HistoriaEntry = CollectionEntry<"historia">;
 export type BlogEntry = CollectionEntry<"blog">;
 export type DocsEntry = CollectionEntry<"docs">;
 export type HomeEntry = CollectionEntry<"home">;
+export type GaleriaEntry = CollectionEntry<"galeria">;
 export type IndexCardsEntry = CollectionEntry<"indexCards">;
 export type PoetryEntry = CollectionEntry<"poetry">;
 export type PortfolioEntry = CollectionEntry<"portfolio">;
