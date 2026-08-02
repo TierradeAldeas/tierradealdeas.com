@@ -1,0 +1,40 @@
+---
+import type { GaleriaEntry } from "@/types";
+import BaseLayout from "@components/base/BaseLayout.astro";
+import PageHeader from "@components/common/PageHeader.astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  entry: GaleriaEntry;
+}
+
+const { entry } = Astro.props;
+const { title, description, images } = entry.data;
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHeader title={title} />
+  <section class="section">
+    <div class="container">
+      <div class="row">
+        {
+          images.map((img) => (
+            <div class="md:col-6 lg:col-4 h-min p-2">
+              <div class="glass rounded-lg overflow-hidden intersect:animate-fadeUp opacity-0">
+                <Image
+                  class="w-full h-full object-cover"
+                  src={img.src}
+                  alt={img.alt}
+                  width={1280}
+                  height={960}
+                  loading="lazy"
+                />
+                {img.caption && <p class="p-2 text-center text-sm">{img.caption}</p>}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
