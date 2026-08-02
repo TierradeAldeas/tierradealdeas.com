@@ -202,6 +202,7 @@ export const collections = {
   home,
   indexCards,
   poetry,
+  galería,
   portfolio,
   recipes,
   terms,
