@@ -115,6 +115,22 @@ const poetry = defineCollection({
     }),
 });
 
+const galeria = defineCollection({
+  loader: glob({ pattern: "-index.{md,mdx}", base: "./src/content/galeria" }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string().optional(),
+      images: z.array(
+        z.object({
+          src: image(),
+          alt: z.string().default(""),
+          caption: z.string().optional(),
+        })
+      ),
+    }),
+});
+
 const portfolio = defineCollection({
   loader: glob({
     pattern: "-index.{md,mdx}",
