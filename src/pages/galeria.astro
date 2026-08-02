@@ -1,0 +1,9 @@
+---
+import type { GaleriaEntry } from "@/types";
+import EntryLayout from "@components/galeria/EntryLayout.astro";
+import { getIndex } from "@lib/contentParser";
+
+const entry = (await getIndex("galeria")) as GaleriaEntry;
+---
+
+<EntryLayout entry={entry} />
