@@ -1,0 +1,8 @@
+---
+title: Galería
+description: Imágenes de la comarca
+images:
+  - src: "@assets/galeria/foto1.jpg"
+    alt: "Descripción de la foto"
+    caption: "Pie de foto opcional"
+---
