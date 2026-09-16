@@ -202,7 +202,7 @@ export const collections = {
   home,
   indexCards,
   poetry,
-  galería,
+  galeria,
   portfolio,
   recipes,
   terms,
